@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from familiamtv.views import comosellaman, familia
+from familiamtv.views import comosellaman, familia, familiaplantilla
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("ingrese-datos/<nombre>/<parentezco>/<edad>/",familia),
+    path("ingrese-datos/<nombree>/<parentezco>/<edad>/",familia),
     path("miembros",comosellaman),
+    path("ingrese/<apado>/<relacion>/<anos>/",familiaplantilla),
 ]
 

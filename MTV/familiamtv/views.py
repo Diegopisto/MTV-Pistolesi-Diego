@@ -7,14 +7,27 @@ from django.template import loader
 
 from familiamtv.models import Familia
 
-def familia(self, nombre, parentezco, edad):
+def familia(self, nombree, parentezco, edad):
 
-    familia = Familia(nombre=nombre, parentezco=parentezco, edad=edad)
+    familia = Familia(nombre=nombree, parentezco=parentezco, edad=edad)
     familia.save()
 
     return HttpResponse(f"""<p>Nombre: {familia.nombre} - Parentezco: {familia.parentezco} - Edad: {familia.edad} </p>""")
 
 
+
+def familiaplantilla(self, apado, relacion, anos):
+
+    familiaplantilla = Familia(nombre=apado, parentezco=relacion, edad=anos)
+    familiaplantilla.save()
+
+    dic = {"apado":apado, "relacion":relacion, "anos":anos}
+
+    plantilla2 = loader.get_template("templates.html")
+
+    documento2 = plantilla2.render(dic)
+
+    return HttpResponse(documento2)
 
 
 
@@ -24,7 +37,7 @@ def comosellaman(request):
 
     diccionario = {"nombress":lista_nombres}
 
-    plantilla = loader.get_template("templates.html")
+    plantilla = loader.get_template("templates2.html")
 
     documento = plantilla.render(diccionario)
 
