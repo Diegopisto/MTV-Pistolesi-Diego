@@ -2,6 +2,8 @@ from datetime import datetime
 from django.shortcuts import render
 from django.http import HttpResponse
 
+
+
 from django.template import loader
 # Create your views here.
 
@@ -16,12 +18,14 @@ def familia(self, nombree, parentezco, edad):
 
 
 
-def familiaplantilla(self, apado, relacion, anos):
+def familiaplantilla(self, apado, relacion, anos, cumpleanos):
 
-    familiaplantilla = Familia(nombre=apado, parentezco=relacion, edad=anos)
+#ingresar fecha de nacimiento copiando y pegando la siguiente estructura YYYY-MM-DD    
+
+    familiaplantilla = Familia(nombre=apado, parentezco=relacion, edad=anos, fecha_nacimiento=cumpleanos)
     familiaplantilla.save()
 
-    dic = {"apado":apado, "relacion":relacion, "anos":anos}
+    dic = {"apado":apado, "relacion":relacion, "anos":anos, "cumpleanos":cumpleanos, "fecha_registro":datetime.now()}
 
     plantilla2 = loader.get_template("templates.html")
 
@@ -43,3 +47,17 @@ def comosellaman(request):
 
     return HttpResponse(documento)
  
+
+def lista_familia(self):
+
+    listaf = Familia.objects.all()
+
+    dic = {"familialista":listaf}
+
+    plantilla = loader.get_template("lista_familia.html")
+
+    documento = plantilla.render(dic)
+
+    return HttpResponse(documento)
+
+    #return render(self, "lista_familia.html", {"lista_familia":lista})
